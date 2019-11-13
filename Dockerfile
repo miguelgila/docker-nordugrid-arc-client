@@ -1,13 +1,18 @@
-FROM centos:7
+FROM centos:8
 
-MAINTAINER Miguel Gila <miguel.gila@cscs.ch>
-
-RUN yum -y install https://download.nordugrid.org/packages/nordugrid-release/testing/6rc1/centos/el7/x86_64/nordugrid-release-6-0.rc1.el7.noarch.rpm
-
-RUN yum -y install nordugrid-arc-client nordugrid-arc-plugins-globus
+LABEL "Author"="Miguel Gila <miguel.gila@cscs.ch"
+LABEL version="8/"
+LABEL description="Very basic Nordugrid ARC client based on CentOS"
 
 ADD http://repository.egi.eu/sw/production/cas/1/current/repo-files/EGI-trustanchors.repo /etc/yum.repos.d/
+RUN yum -y install https://download.nordugrid.org/packages/nordugrid-release/releases/6/centos/el8/x86_64/nordugrid-release-6-1.el8.noarch.rpm
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
-RUN yum -y install ca-policy-egi-core wget curl
+RUN yum -y install dnf-utils
+RUN yum config-manager --set-enabled PowerTools
+RUN yum -y install nordugrid-arc-client nordugrid-arc-plugins-globus
+
+
+RUN yum -y install ca-policy-egi-core wget curl gfal2-util gfal2-all
 
 RUN rm -rf /tmp

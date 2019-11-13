@@ -1,3 +1,3 @@
-Very basic Nordugrid ARC client based on CentOS 7 images.
+Very basic Nordugrid ARC client based on CentOS images.
 
 
